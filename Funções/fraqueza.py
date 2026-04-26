@@ -49,7 +49,7 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.moveTo(center_x + 10, center_y + 10)
+            pyautogui.moveTo(center_x + 10, center_y)
             pyautogui.moveTo(center_x, center_y)
 
 
