@@ -1,33 +1,45 @@
 import cv2
 import numpy as np
 import mss
-import time
 import os
+import pyautogui
 
+# caminho correto
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "items.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "items.png")  # corrigido
+
+# carregar template
+template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 
 threshold = 0.8
 
-def detectar_tela(frame, template, threshold=0.8):
-
-    res = cv2.matchTemplate(frame, template, cv2.TM_CCOEFF_NORMED)
-    _, max_val, _, _ = cv2.minMaxLoc(res)
-
-    return max_val >= threshold
-
 with mss.mss() as sct:
+    monitor = sct.monitors[1]
 
     while True:
-
-        monitor = sct.monitors[1]
-
         img = np.array(sct.grab(monitor))
+        img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
 
-        cv2.imshow("debug",img)
+        res = cv2.matchTemplate(img, template, cv2.TM_CCOEFF_NORMED)
+        _, max_val, _, max_loc = cv2.minMaxLoc(res)
 
-        if cv2.waitKey(1)==27:
+        if max_val >= threshold:
+            print("Imagem encontrada!", max_val)
+
+            # pega tamanho do template
+            h, w = template.shape[:2]
+
+            # calcula centro
+            center_x = max_loc[0] + w // 2
+            center_y = max_loc[1] + h // 2
+
+            print("Centro:", center_x, center_y)
+
+            # clica
+            pyautogui.click(center_x, center_y)
+
             break
-
+        else:
+            print("Não encontrou")
 
 cv2.destroyAllWindows()
