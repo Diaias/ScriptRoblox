@@ -1,10 +1,11 @@
 import cv2
 import numpy as np
+import pyautogui
 import mss
 import os
 import time
 import keyboard
-import pyautogui
+import pydirectinput
 
 base_dir = os.path.dirname(__file__)
 caminho = os.path.join(base_dir, "..", "Ibagens", "orbs.png")
@@ -18,8 +19,7 @@ scales = np.linspace(0.7, 1.3, 10)
 
 with mss.mss() as sct:
     monitor = sct.monitors[1]
-    time.sleep(2)
-    pyautogui.scroll(-500)
+    
 
     while True:
         img = np.array(sct.grab(monitor))
@@ -51,13 +51,15 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.click(center_x, center_y)
             time.sleep(0.1)
-            pyautogui.click(center_x, center_y)
+            pydirectinput.moveTo(center_x-10, center_y)
             time.sleep(0.1)
-
-            pyautogui.scroll(500)
-            keyboard.press_and_release("escape")
+            pydirectinput.moveTo(center_x, center_y)
+            time.sleep(0.1)
+            pydirectinput.mouseDown(button = 'left')
+            time.sleep(0.1)
+            pydirectinput.mouseUp(button = 'left')
+            time.sleep(0.1)
             break
         else:
             print(f"Melhor match: {best_val:.2f}")

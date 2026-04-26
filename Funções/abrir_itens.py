@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import mss
 import os
-import pyautogui
+import pydirectinput
 import time
 
 base_dir = os.path.dirname(__file__)
@@ -48,9 +48,12 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.click(center_x, center_y)
             time.sleep(0.1)
-            pyautogui.click(center_x, center_y)
+            pydirectinput.moveTo(center_x+10, center_y)
+            time.sleep(0.1)
+            pydirectinput.moveTo(center_x, center_y)
+            time.sleep(0.1)
+            pydirectinput.click(center_x, center_y)
 
             break
         else:

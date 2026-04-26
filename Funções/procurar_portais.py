@@ -5,6 +5,7 @@ import os
 import time
 import keyboard
 import pyautogui
+import pydirectinput
 
 base_dir = os.path.dirname(__file__)
 caminho = os.path.join(base_dir, "..", "Ibagens", "search_items.png")
@@ -49,9 +50,9 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.click(center_x, center_y)
+            pydirectinput.click(center_x-10, center_y)
             time.sleep(0.1)
-            pyautogui.click(center_x, center_y)
+            pydirectinput.click(center_x, center_y)
             time.sleep(0.1)
             pyautogui.write("Patternine Portal", interval= 0.01)
             keyboard.press_and_release("enter")
