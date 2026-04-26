@@ -18,7 +18,14 @@ threshold = 0.7
 scales = np.linspace(0.2, 1.7, 15)
 
 with mss.mss() as sct:
-    monitor = sct.monitors[1]
+    monitor_full = sct.monitors[1]
+
+    monitor = {
+        "top": monitor_full["top"],
+        "left": monitor_full["left"],
+        "width": monitor_full["width"] // 2,  # 👈 metade esquerda
+        "height": monitor_full["height"]
+    }
 
     while True:
         img = np.array(sct.grab(monitor))

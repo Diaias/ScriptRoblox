@@ -17,7 +17,7 @@ threshold = 0.7
 
 scales = np.linspace(0.7, 1.3, 10)
 
-with mss.mss() as sct:
+with mss.MSS() as sct:
     monitor = sct.monitors[1]
     
 
@@ -50,7 +50,7 @@ with mss.mss() as sct:
 
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
-            
+
             pydirectinput.moveTo(center_x-10, center_y)
             pydirectinput.moveTo(center_x, center_y)
             time.sleep(0.2)

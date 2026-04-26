@@ -1,12 +1,14 @@
 import cv2
 import numpy as np
+import pydirectinput
 import mss
 import os
-import pydirectinput
 import time
+import keyboard
+import pyautogui
 
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "items.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "E.png")
 
 template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
@@ -15,13 +17,13 @@ threshold = 0.7
 
 scales = np.linspace(0.7, 1.3, 10)
 
-with mss.mss() as sct:
+with mss.MSS() as sct:
     monitor_full = sct.monitors[1]
 
     monitor = {
         "top": monitor_full["top"],
-        "left": monitor_full["left"],
-        "width": monitor_full["width"] // 2,  # 👈 metade esquerda
+        "left": monitor_full["left"] + monitor_full["width"] // 2,
+        "width": monitor_full["width"] // 2,  
         "height": monitor_full["height"]
     }
 
@@ -52,15 +54,18 @@ with mss.mss() as sct:
 
             h, w = best_size
 
-            center_x = best_loc[0] + w // 2
-            center_y = best_loc[1] + h // 2
+            center_x = best_loc[0] + w // 2 + monitor["left"]
+            center_y = best_loc[1] + h // 2 + monitor["top"]
 
-            time.sleep(0.1)
-            pydirectinput.moveTo(center_x+10, center_y)
-            time.sleep(0.1)
+            pydirectinput.moveTo(center_x-10, center_y)
             pydirectinput.moveTo(center_x, center_y)
+            time.sleep(0.2)
+            pydirectinput.mouseDown(button = 'left')
             time.sleep(0.1)
-            pydirectinput.click(center_x, center_y)
+            pydirectinput.mouseUp(button = 'left')
+            time.sleep(0.1)
+            keyboard.press_and_release("e")
+
 
             break
         else:

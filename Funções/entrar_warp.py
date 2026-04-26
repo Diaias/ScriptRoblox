@@ -18,7 +18,14 @@ threshold = 0.7
 scales = np.linspace(0.7, 1.3, 10)
 
 with mss.mss() as sct:
-    monitor = sct.monitors[1]
+    monitor_full = sct.monitors[1]
+
+    monitor = {
+        "top": monitor_full["top"],
+        "left": monitor_full["left"],
+        "width": monitor_full["width"] // 2,  # 👈 metade esquerda
+        "height": monitor_full["height"]
+    }
 
     while True:
         img = np.array(sct.grab(monitor))
@@ -53,6 +60,10 @@ with mss.mss() as sct:
             pydirectinput.moveTo(center_x-10, center_y)
             pydirectinput.moveTo(center_x, center_y)
             time.sleep(0.2)
+            pydirectinput.mouseDown(button = 'left')
+            time.sleep(0.1)
+            pydirectinput.mouseUp(button = 'left')
+            time.sleep(0.1)
             pydirectinput.mouseDown(button = 'left')
             time.sleep(0.1)
             pydirectinput.mouseUp(button = 'left')

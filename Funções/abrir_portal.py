@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import pydirectinput
 import mss
 import os
 import time
@@ -16,8 +17,19 @@ threshold = 0.7
 
 scales = np.linspace(0.7, 1.3, 10)
 
-with mss.mss() as sct:
-    monitor = sct.monitors[1]
+pydirectinput.mouseDown(button = 'left')
+time.sleep(0.1)
+pydirectinput.mouseUp(button = 'left')
+
+with mss.MSS() as sct:
+    monitor_full = sct.monitors[1]
+
+    monitor = {
+        "top": monitor_full["top"],
+        "left": monitor_full["left"],
+        "width": monitor_full["width"] // 2,  
+        "height": monitor_full["height"]
+    }
 
     while True:
         img = np.array(sct.grab(monitor))
@@ -49,11 +61,10 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.moveTo(center_x-10, center_y)
-            time.sleep(0.1)
-            pyautogui.moveTo(center_x, center_y)
-            time.sleep(0.1)
-            keyboard.press_and_release("enter")
+            pydirectinput.moveTo(center_x-10, center_y)
+            pydirectinput.moveTo(center_x, center_y)
+            time.sleep(0.2)
+            
 
 
             break

@@ -8,16 +8,16 @@ import keyboard
 import pydirectinput
 
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "gravador_operacoes.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "3_pontinho.png")
 
 template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
 
 threshold = 0.7
 
-scales = np.linspace(0.1, 1, 10)
+scales = np.linspace(0.7, 1.3, 10)
 
-with mss.mss() as sct:
+with mss.MSS() as sct:
     monitor = sct.monitors[1]
     
 
