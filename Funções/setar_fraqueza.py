@@ -63,7 +63,7 @@ with mss.MSS() as sct:
                     best_size = resized.shape[:2]
 
         if best_val >= threshold:
-            print(f"Encontrou: {best_name} ({best_val:.2f})")
+            print(f"{best_name}")
 
             break
         else:
