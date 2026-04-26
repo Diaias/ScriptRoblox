@@ -49,12 +49,8 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.move(center_x, center_y)
-            time.sleep(0.1)
-            pyautogui.click(center_x, center_y)
-            time.sleep(0.1)
-            pyautogui.write("Patternine Portal", interval= 0.01)
-            keyboard.press_and_release("enter")
+            pyautogui.moveTo(center_x + 10, center_y + 10)
+            pyautogui.moveTo(center_x, center_y)
 
 
             break
