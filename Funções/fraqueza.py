@@ -2,11 +2,12 @@ import cv2
 import numpy as np
 import mss
 import os
-import pyautogui
 import time
+import keyboard
+import pyautogui
 
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "items.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "icone_portal.png")
 
 template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
@@ -48,9 +49,13 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pyautogui.click(center_x, center_y)
+            pyautogui.move(center_x, center_y)
             time.sleep(0.1)
             pyautogui.click(center_x, center_y)
+            time.sleep(0.1)
+            pyautogui.write("Patternine Portal", interval= 0.01)
+            keyboard.press_and_release("enter")
+
 
             break
         else:
