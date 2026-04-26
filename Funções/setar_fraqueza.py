@@ -29,8 +29,8 @@ with mss.MSS() as sct:
     monitor = {
         "left": mouse_x,
         "top": mouse_y,
-        "width": 400,
-        "height": 600
+        "width": 500,
+        "height": 800
     }
 
     while True:
