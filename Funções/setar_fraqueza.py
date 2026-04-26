@@ -17,7 +17,7 @@ templates = {
     "Vermelho": cv2.imread(os.path.join(pasta, "Vermelho.png")),
 }
 
-threshold = 0.6
+threshold = 0.8
 
 scales = np.linspace(0.2, 1.3, 10)
 
