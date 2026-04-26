@@ -50,16 +50,13 @@ with mss.mss() as sct:
 
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
-
-            time.sleep(0.1)
+            
             pydirectinput.moveTo(center_x-10, center_y)
-            time.sleep(0.1)
             pydirectinput.moveTo(center_x, center_y)
-            time.sleep(0.1)
+            time.sleep(0.2)
             pydirectinput.mouseDown(button = 'left')
             time.sleep(0.1)
             pydirectinput.mouseUp(button = 'left')
-            time.sleep(0.1)
             break
         else:
             print(f"Melhor match: {best_val:.2f}")

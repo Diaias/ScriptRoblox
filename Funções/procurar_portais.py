@@ -15,7 +15,7 @@ template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
 
 threshold = 0.7
 
-scales = np.linspace(0.7, 1.3, 10)
+scales = np.linspace(0.2, 1.7, 15)
 
 with mss.mss() as sct:
     monitor = sct.monitors[1]
@@ -50,8 +50,9 @@ with mss.mss() as sct:
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
 
-            pydirectinput.click(center_x-10, center_y)
-            time.sleep(0.1)
+            pydirectinput.moveTo(center_x + 10, center_y)
+            pydirectinput.moveTo(center_x, center_y)
+            time.sleep(0.2)
             pydirectinput.click(center_x, center_y)
             time.sleep(0.1)
             pyautogui.write("Patternine Portal", interval= 0.01)
