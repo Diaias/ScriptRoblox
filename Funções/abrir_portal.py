@@ -64,7 +64,9 @@ with mss.MSS() as sct:
             pydirectinput.moveTo(center_x-10, center_y)
             pydirectinput.moveTo(center_x, center_y)
             time.sleep(0.2)
-            
+            pydirectinput.mouseDown(button = 'left')
+            time.sleep(0.1)
+            pydirectinput.mouseUp(button = 'left')
 
 
             break

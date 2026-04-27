@@ -8,25 +8,18 @@ import keyboard
 import pydirectinput
 
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "orbs.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "sincronizador.png")
 
 template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
 
 threshold = 0.7
 
-scales = np.linspace(0.7, 1.3, 10)
+scales = np.linspace(0.1, 1, 10)
 
-with mss.MSS() as sct:
-    monitor_full = sct.monitors[1]
-
-    monitor = {
-        "top": monitor_full["top"],
-        "left": monitor_full["left"],
-        "width": monitor_full["width"] // 2,  # 👈 metade esquerda
-        "height": monitor_full["height"]
-    }
-
+with mss.mss() as sct:
+    monitor = sct.monitors[1]
+    
     while True:
         img = np.array(sct.grab(monitor))
         img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB)
@@ -56,7 +49,7 @@ with mss.MSS() as sct:
 
             center_x = best_loc[0] + w // 2
             center_y = best_loc[1] + h // 2
-
+            
             pydirectinput.moveTo(center_x-10, center_y)
             pydirectinput.moveTo(center_x, center_y)
             time.sleep(0.2)

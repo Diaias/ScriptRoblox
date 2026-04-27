@@ -8,7 +8,7 @@ import keyboard
 import pydirectinput
 
 base_dir = os.path.dirname(__file__)
-caminho = os.path.join(base_dir, "..", "Ibagens", "orbs.png")
+caminho = os.path.join(base_dir, "..", "Ibagens", "start.png")
 
 template = cv2.imread(caminho, cv2.IMREAD_COLOR)
 template = cv2.cvtColor(template, cv2.COLOR_BGR2RGB)
